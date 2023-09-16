@@ -46,6 +46,9 @@ public class Customer {
         this.tripBookingList = tripBookingList;
     }
 
+    public Customer(){
+
+    }
     public Customer(int customerId, String mobile, String password, List<TripBooking> tripBookingList) {
         this.customerId = customerId;
         this.mobile = mobile;
