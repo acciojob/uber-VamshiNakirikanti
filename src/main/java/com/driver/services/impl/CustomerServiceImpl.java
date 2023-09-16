@@ -86,6 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		TripBooking tripBooking = optionalTripBooking.get();
 		tripBooking.setStatus(TripStatus.CANCELED);
+		tripBooking.setBill(0);
 		tripBookingRepository2.save(tripBooking);
 
 		Driver driver = tripBooking.getDriver();
