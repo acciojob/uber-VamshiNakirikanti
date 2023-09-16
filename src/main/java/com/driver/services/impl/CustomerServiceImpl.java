@@ -14,6 +14,7 @@ import com.driver.model.TripStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -79,7 +80,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void cancelTrip(Integer tripId){
 		//Cancel the trip having given trip Id and update TripBooking attributes accordingly
-		TripBooking tripBooking = tripBookingRepository2.findById(tripId).get();
+		Optional<TripBooking> optionalTripBooking = tripBookingRepository2.findById(tripId);
+		if(!optionalTripBooking.isPresent()){
+			return;
+		}
+		TripBooking tripBooking = optionalTripBooking.get();
 		tripBooking.setStatus(TripStatus.CANCELED);
 		tripBookingRepository2.save(tripBooking);
 
@@ -91,7 +96,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void completeTrip(Integer tripId){
 		//Complete the trip having given trip Id and update TripBooking attributes accordingly
-		TripBooking tripBooking = tripBookingRepository2.findById(tripId).get();
+		Optional<TripBooking> optionalTripBooking = tripBookingRepository2.findById(tripId);
+		if(!optionalTripBooking.isPresent()){
+			return;
+		}
+		TripBooking tripBooking = optionalTripBooking.get();
 		tripBooking.setStatus(TripStatus.COMPLETED);
 		tripBookingRepository2.save(tripBooking);
 
