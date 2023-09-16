@@ -48,6 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
 		for(Driver driver:driverList){
 			if(driver.getCab().getAvailable()){
 				availableDriver = driver;
+				break;
 			}
 		}
 		if(availableDriver==null){
@@ -81,6 +82,10 @@ public class CustomerServiceImpl implements CustomerService {
 		TripBooking tripBooking = tripBookingRepository2.findById(tripId).get();
 		tripBooking.setStatus(TripStatus.CANCELED);
 		tripBookingRepository2.save(tripBooking);
+
+		Driver driver = tripBooking.getDriver();
+		driver.getCab().setAvailable(true);
+		driverRepository2.save(driver);
 	}
 
 	@Override
@@ -89,5 +94,9 @@ public class CustomerServiceImpl implements CustomerService {
 		TripBooking tripBooking = tripBookingRepository2.findById(tripId).get();
 		tripBooking.setStatus(TripStatus.COMPLETED);
 		tripBookingRepository2.save(tripBooking);
+
+		Driver driver = tripBooking.getDriver();
+		driver.getCab().setAvailable(true);
+		driverRepository2.save(driver);
 	}
 }
