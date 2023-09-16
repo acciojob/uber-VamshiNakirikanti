@@ -10,25 +10,20 @@ import javax.persistence.Id;
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int AdminId;
     private String username;
     private String password;
 
     public Admin(){
 
     }
-    public Admin(int id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
+
+    public int getAdminId() {
+        return AdminId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setAdminId(int adminId) {
+        AdminId = adminId;
     }
 
     public String getUsername() {
@@ -44,6 +39,12 @@ public class Admin {
     }
 
     public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Admin(int adminId, String username, String password) {
+        AdminId = adminId;
+        this.username = username;
         this.password = password;
     }
 }
